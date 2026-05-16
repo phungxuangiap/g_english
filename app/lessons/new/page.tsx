@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import PixelButton from '@/components/ui/PixelButton';
 import PixelCard from '@/components/ui/PixelCard';
 import { createLesson } from './actions';
+import { fetchTranscriptFromYouTube } from './transcript-actions';
 import { parseTranscript } from '@/lib/transcript';
 
 export default function NewLessonPage() {
@@ -13,9 +14,33 @@ export default function NewLessonPage() {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [transcriptText, setTranscriptText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFetchingTranscript, setIsFetchingTranscript] = useState(false);
   const [error, setError] = useState('');
 
   const previewSegments = transcriptText ? parseTranscript(transcriptText).slice(0, 5) : [];
+
+  const handleFetchTranscript = async () => {
+    if (!youtubeUrl) {
+      setError('Please enter a YouTube URL first');
+      return;
+    }
+
+    setError('');
+    setIsFetchingTranscript(true);
+
+    try {
+      const result = await fetchTranscriptFromYouTube(youtubeUrl);
+      if (result.success && result.transcript) {
+        setTranscriptText(result.transcript);
+      } else {
+        setError(result.error || 'Failed to fetch transcript');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch transcript');
+    } finally {
+      setIsFetchingTranscript(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,14 +82,24 @@ export default function NewLessonPage() {
                 <label className="font-mono text-sm text-[#8888aa] block mb-2">
                   YouTube URL
                 </label>
-                <input
-                  type="text"
-                  value={youtubeUrl}
-                  onChange={(e) => setYoutubeUrl(e.target.value)}
-                  required
-                  className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
-                  placeholder="https://www.youtube.com/watch?v=..."
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={youtubeUrl}
+                    onChange={(e) => setYoutubeUrl(e.target.value)}
+                    required
+                    className="flex-1 bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                  />
+                  <PixelButton
+                    type="button"
+                    variant="cyan"
+                    onClick={handleFetchTranscript}
+                    disabled={isFetchingTranscript || !youtubeUrl}
+                  >
+                    {isFetchingTranscript ? 'FETCHING...' : 'AUTO FETCH'}
+                  </PixelButton>
+                </div>
               </div>
 
               <div>
@@ -77,7 +112,9 @@ export default function NewLessonPage() {
                   required
                   rows={12}
                   className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-terminal text-lg focus:border-[#00f5d4] focus:outline-none resize-y"
-                  placeholder={`Format 1 (Simple):
+                  placeholder={`Click "AUTO FETCH" to get transcript automatically, or paste manually:
+
+Format 1 (Simple):
 [00:00:03.500] Hello, welcome to today's lesson.
 [00:00:07.200] We're going to talk about habits.
 
