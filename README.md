@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# English Learning App
+
+A full-stack web application for learning English through YouTube videos with interactive transcripts.
+
+## Features
+
+- **YouTube Video Player**: Watch videos with synchronized transcripts
+- **Interactive Transcripts**: Click any sentence to jump to that moment
+- **Loop Sentences**: Repeat individual sentences for practice
+- **Save to Library**: Build your personal collection of sentences
+- **Pixel/Retro Theme**: Spotify-inspired dark theme with pixel art aesthetics
+
+## Tech Stack
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Auth, RLS)
+- **Player**: YouTube IFrame API
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
-
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Set up Supabase:
+   - Create a new Supabase project at https://supabase.com
+   - Run the SQL schema from `supabase-schema.sql` in the SQL editor
+   - Enable Email authentication (or Google OAuth) in Authentication settings
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configure environment variables in `.env.local`:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Create a Lesson**: Add a YouTube URL and transcript (supports SRT or simple timestamp format)
+2. **Watch & Learn**: Click sentences to jump, loop for practice, save favorites
+3. **Build Your Library**: Review saved sentences anytime
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Transcript Format
 
-## Deploy on Vercel
+Simple format:
+```
+[00:00:03.500] Hello, welcome to today's lesson.
+[00:00:07.200] We're going to talk about habits.
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+SRT format:
+```
+1
+00:00:03,500 --> 00:00:07,200
+Hello, welcome to today's lesson.
+```
