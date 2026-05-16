@@ -54,5 +54,15 @@ CREATE POLICY "lesson_owner_insert_segments" ON transcript_segments FOR INSERT
     SELECT 1 FROM lessons WHERE lessons.id = lesson_id AND lessons.user_id = auth.uid()
   ));
 
+CREATE POLICY "lesson_owner_delete_segments" ON transcript_segments FOR DELETE
+  USING (EXISTS (
+    SELECT 1 FROM lessons WHERE lessons.id = lesson_id AND lessons.user_id = auth.uid()
+  ));
+
+CREATE POLICY "lesson_owner_update_segments" ON transcript_segments FOR UPDATE
+  USING (EXISTS (
+    SELECT 1 FROM lessons WHERE lessons.id = lesson_id AND lessons.user_id = auth.uid()
+  ));
+
 -- Library: owner full access
 CREATE POLICY "owner_all_library" ON library_items FOR ALL USING (auth.uid() = user_id);

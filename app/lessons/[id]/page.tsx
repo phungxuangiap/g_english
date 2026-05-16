@@ -7,6 +7,10 @@ import { Lesson, TranscriptSegment } from '@/types';
 import YouTubePlayer from '@/components/player/YouTubePlayer';
 import PlayerControls from '@/components/player/PlayerControls';
 import TranscriptPanel from '@/components/transcript/TranscriptPanel';
+import EditLessonForm from '@/components/lessons/EditLessonForm';
+import DeleteLessonButton from '@/components/lessons/DeleteLessonButton';
+import PixelButton from '@/components/ui/PixelButton';
+import { deleteLesson } from '../actions';
 import { useYouTubePlayer } from '@/hooks/useYouTubePlayer';
 import { useTranscriptSync } from '@/hooks/useTranscriptSync';
 import { useLoopSegment } from '@/hooks/useLoopSegment';
@@ -21,6 +25,7 @@ export default function LessonPage() {
   const [segments, setSegments] = useState<TranscriptSegment[]>([]);
   const [loopSegment, setLoopSegment] = useState<TranscriptSegment | null>(null);
   const [userId, setUserId] = useState<string | undefined>();
+  const [isEditing, setIsEditing] = useState(false);
 
   const { currentTime, isPlaying, isReady, play, pause, seekTo } = useYouTubePlayer(
     lesson?.youtube_video_id || ''
@@ -62,7 +67,7 @@ export default function LessonPage() {
 
     loadLesson();
     loadUser();
-  }, [lessonId, supabase]);
+  }, [lessonId, supabase, isEditing]);
 
   useEffect(() => {
     if (userId) {
@@ -86,10 +91,34 @@ export default function LessonPage() {
     );
   }
 
+  if (isEditing) {
+    return (
+      <div className="min-h-screen p-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="font-pixel text-3xl text-[#00f5d4] mb-8">EDIT LESSON</h1>
+          <EditLessonForm
+            lesson={lesson}
+            onCancel={() => setIsEditing(false)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen flex flex-col">
-      <div className="p-4 border-b-2 border-[#333355]">
+      <div className="p-4 border-b-2 border-[#333355] flex justify-between items-center">
         <h1 className="font-mono text-xl text-[#e8e8f0]">{lesson.title}</h1>
+        <div className="flex gap-3">
+          <PixelButton variant="cyan" onClick={() => setIsEditing(true)}>
+            EDIT
+          </PixelButton>
+          <DeleteLessonButton
+            lessonId={lesson.id}
+            lessonTitle={lesson.title}
+            onDelete={deleteLesson}
+          />
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">

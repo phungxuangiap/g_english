@@ -44,24 +44,47 @@ export function parseTranscript(raw: string): ParsedSegment[] {
       i++;
     }
   } else {
-    // Parse simple [HH:MM:SS.mmm] format
+    // Parse simple timestamp format - supports both [HH:MM:SS.mmm] and [MM:SS.mmm]
     let order = 0;
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
 
-      const match = line.match(/^\[(\d{2}):(\d{2}):(\d{2})\.(\d{3})\]\s*(.+)$/);
-      if (match) {
-        const [, hours, minutes, seconds, ms, text] = match;
-        const start_time = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds) + parseInt(ms) / 1000;
+      // Try [HH:MM:SS.mmm] format first
+      let match = line.match(/^\[(\d{2}):(\d{2}):(\d{2})\.(\d{3})\]\s*(.+)$/);
+      let start_time = 0;
+      let text = '';
 
+      if (match) {
+        const [, hours, minutes, seconds, ms, txt] = match;
+        start_time = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds) + parseInt(ms) / 1000;
+        text = txt;
+      } else {
+        // Try [MM:SS.mmm] format
+        match = line.match(/^\[(\d{2}):(\d{2})\.(\d{3})\]\s*(.+)$/);
+        if (match) {
+          const [, minutes, seconds, ms, txt] = match;
+          start_time = parseInt(minutes) * 60 + parseInt(seconds) + parseInt(ms) / 1000;
+          text = txt;
+        }
+      }
+
+      if (match && text) {
         // End time is start of next segment or +4 seconds
         let end_time = start_time + 4;
         if (i + 1 < lines.length) {
-          const nextMatch = lines[i + 1].match(/^\[(\d{2}):(\d{2}):(\d{2})\.(\d{3})\]/);
+          const nextLine = lines[i + 1];
+          // Try both formats for next line
+          let nextMatch = nextLine.match(/^\[(\d{2}):(\d{2}):(\d{2})\.(\d{3})\]/);
           if (nextMatch) {
             const [, h, m, s, ms] = nextMatch;
             end_time = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(ms) / 1000;
+          } else {
+            nextMatch = nextLine.match(/^\[(\d{2}):(\d{2})\.(\d{3})\]/);
+            if (nextMatch) {
+              const [, m, s, ms] = nextMatch;
+              end_time = parseInt(m) * 60 + parseInt(s) + parseInt(ms) / 1000;
+            }
           }
         }
 
