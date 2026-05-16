@@ -14,7 +14,10 @@ export default function Header() {
   useEffect(() => {
     const supabase = createClient();
 
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    console.log('Header: Checking auth state...');
+    supabase.auth.getUser().then(({ data: { user }, error }) => {
+      console.log('Header: User data:', user);
+      console.log('Header: Error:', error);
       setUser(user);
       setLoading(false);
     });
@@ -22,6 +25,7 @@ export default function Header() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log('Header: Auth state changed:', _event, session?.user);
       setUser(session?.user ?? null);
     });
 
