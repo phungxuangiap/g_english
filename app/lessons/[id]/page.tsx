@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Lesson, TranscriptSegment } from '@/types';
@@ -19,7 +19,7 @@ import { useLibrary } from '@/hooks/useLibrary';
 export default function LessonPage() {
   const params = useParams();
   const lessonId = params.id as string;
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [segments, setSegments] = useState<TranscriptSegment[]>([]);

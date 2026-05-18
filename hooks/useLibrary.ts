@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 export function useLibrary(userId: string | undefined) {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   const loadSavedIds = useCallback(async () => {
     if (!userId) return;
