@@ -17,7 +17,6 @@ interface TranscriptPanelProps {
 
 export default function TranscriptPanel({
   segments,
-  currentTime,
   activeIndex,
   loopSegmentId,
   savedIds,
@@ -26,27 +25,26 @@ export default function TranscriptPanel({
   onToggleSave,
 }: TranscriptPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (activeRef.current && containerRef.current) {
+    if (activeRef.current && containerRef.current && contentRef.current) {
       const container = containerRef.current;
       const active = activeRef.current;
-      const containerHeight = container.clientHeight;
-      const activeTop = active.offsetTop;
-      const activeHeight = active.clientHeight;
+      const content = contentRef.current;
+      const scrollTop = active.offsetTop - content.offsetTop;
 
-      const scrollTo = activeTop - containerHeight / 2 + activeHeight / 2;
-      container.scrollTo({ top: scrollTo, behavior: 'smooth' });
+      container.scrollTo({ top: scrollTop, behavior: 'smooth' });
     }
   }, [activeIndex]);
 
   return (
     <div
       ref={containerRef}
-      className="h-full overflow-y-auto bg-[#0a0a0f] border-l-2 border-[#333355]"
+      className="relative h-[45vh] overflow-y-auto bg-[#0a0a0f] border-t-2 border-[#333355] lg:h-full lg:border-t-0 lg:border-l-2"
     >
-      <div className="p-4 space-y-2">
+      <div ref={contentRef} className="p-4 space-y-2">
         {segments.map((segment, index) => (
           <div
             key={segment.id}

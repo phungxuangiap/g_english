@@ -106,8 +106,8 @@ export default function LessonPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <div className="p-4 border-b-2 border-[#333355] flex justify-between items-center">
+    <div className="min-h-screen lg:h-screen flex flex-col">
+      <div className="p-4 border-b-2 border-[#333355] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
         <h1 className="font-mono text-xl text-[#e8e8f0]">{lesson.title}</h1>
         <div className="flex gap-3">
           <PixelButton variant="cyan" onClick={() => setIsEditing(true)}>
@@ -121,7 +121,7 @@ export default function LessonPage() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
         <div className="lg:w-1/2 flex flex-col">
           <div className="p-4">
             <YouTubePlayer videoId={lesson.youtube_video_id} />
@@ -136,7 +136,7 @@ export default function LessonPage() {
           )}
         </div>
 
-        <div className="lg:w-1/2 flex-1 overflow-hidden">
+        <div className="lg:w-1/2 lg:flex-1 lg:overflow-hidden">
           {isReady ? (
             <TranscriptPanel
               segments={segments}
