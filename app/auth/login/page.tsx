@@ -39,14 +39,14 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-8">
       <div className="max-w-md w-full">
-        <h1 className="font-pixel text-3xl text-[#00f5d4] mb-8 text-center">
+        <h1 className="font-pixel text-3xl text-[#5267a8] mb-8 text-center">
           LOGIN
         </h1>
 
         <PixelCard>
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             <div>
-              <label className="font-mono text-sm text-[#8888aa] block mb-2">
+              <label className="font-mono text-sm text-[#7b8197] block mb-2">
                 Email
               </label>
               <input
@@ -54,13 +54,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+                className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
                 placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <label className="font-mono text-sm text-[#8888aa] block mb-2">
+              <label className="font-mono text-sm text-[#7b8197] block mb-2">
                 Password
               </label>
               <input
@@ -68,13 +68,13 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+                className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
                 placeholder="••••••••"
               />
             </div>
 
             {error && (
-              <div className="bg-[#ff2d78] bg-opacity-20 border-2 border-[#ff2d78] px-4 py-2 font-mono text-sm text-[#ff2d78]">
+              <div className="bg-[#ffe1ea] bg-opacity-20 border-2 border-[#ffadc2] px-4 py-2 font-mono text-sm text-[#b65d76]">
                 {error}
               </div>
             )}
@@ -88,9 +88,9 @@ export default function LoginPage() {
               {isSubmitting ? 'SIGNING IN...' : 'SIGN IN'}
             </PixelButton>
 
-            <p className="text-center font-mono text-sm text-[#8888aa] mt-4">
+            <p className="text-center font-mono text-sm text-[#7b8197] mt-4">
               Don't have an account?{' '}
-              <Link href="/auth/signup" className="text-[#00f5d4] hover:underline">
+              <Link href="/auth/signup" className="text-[#5267a8] hover:underline">
                 Sign up
               </Link>
             </p>

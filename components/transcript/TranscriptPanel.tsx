@@ -42,8 +42,7 @@ export default function TranscriptPanel({
   return (
     <div
       ref={containerRef}
-      className="relative h-[45vh] overflow-y-auto bg-[#0a0a0f] border-t-2 border-[#333355] lg:h-full lg:border-t-0 lg:border-l-2"
-    >
+      className="relative h-[45vh] overflow-y-auto rounded-[1.75rem] border border-white/70 bg-[#fffdf8]/85 shadow-[10px_10px_24px_rgba(167,158,143,0.18),-10px_-10px_24px_rgba(255,255,255,0.85)] lg:h-full"    >
       <div ref={contentRef} className="p-4 space-y-2">
         {segments.map((segment, index) => (
           <div

@@ -59,13 +59,13 @@ export default function NewLessonPage() {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="font-pixel text-3xl text-[#00f5d4] mb-8">CREATE LESSON</h1>
+        <h1 className="font-pixel text-3xl text-[#5267a8] mb-8">CREATE LESSON</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <PixelCard>
+          <PixelCard tint="blue">
             <div className="p-6 space-y-4">
               <div>
-                <label className="font-mono text-sm text-[#8888aa] block mb-2">
+                <label className="font-mono text-sm text-[#7b8197] block mb-2">
                   Lesson Title
                 </label>
                 <input
@@ -73,13 +73,13 @@ export default function NewLessonPage() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+                  className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
                   placeholder="e.g. Daily Habits - English Lesson"
                 />
               </div>
 
               <div>
-                <label className="font-mono text-sm text-[#8888aa] block mb-2">
+                <label className="font-mono text-sm text-[#7b8197] block mb-2">
                   YouTube URL
                 </label>
                 <div className="flex gap-2">
@@ -88,7 +88,7 @@ export default function NewLessonPage() {
                     value={youtubeUrl}
                     onChange={(e) => setYoutubeUrl(e.target.value)}
                     required
-                    className="flex-1 bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+                    className="flex-1 rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
                     placeholder="https://www.youtube.com/watch?v=..."
                   />
                   <PixelButton
@@ -103,7 +103,7 @@ export default function NewLessonPage() {
               </div>
 
               <div>
-                <label className="font-mono text-sm text-[#8888aa] block mb-2">
+                <label className="font-mono text-sm text-[#7b8197] block mb-2">
                   Transcript
                 </label>
                 <textarea
@@ -111,7 +111,7 @@ export default function NewLessonPage() {
                   onChange={(e) => setTranscriptText(e.target.value)}
                   required
                   rows={12}
-                  className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-terminal text-lg focus:border-[#00f5d4] focus:outline-none resize-y"
+                  className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-terminal text-lg text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff] resize-y"
                   placeholder={`Click "AUTO FETCH" to get transcript automatically, or paste manually:
 
 Format 1 (Simple):
@@ -127,14 +127,14 @@ Hello, welcome to today's lesson.`}
 
               {previewSegments.length > 0 && (
                 <div>
-                  <label className="font-mono text-sm text-[#8888aa] block mb-2">
+                  <label className="font-mono text-sm text-[#7b8197] block mb-2">
                     Preview (first 5 segments)
                   </label>
                   <div className="space-y-2">
                     {previewSegments.map((seg, i) => (
                       <div
                         key={i}
-                        className="bg-[#0a0a0f] border border-[#333355] px-3 py-2 font-terminal text-sm text-[#8888aa]"
+                        className="bg-[#f7f4ec]/70 border border-white/70 px-3 py-2 font-terminal text-sm text-[#7b8197]"
                       >
                         [{seg.start_time.toFixed(1)}s - {seg.end_time.toFixed(1)}s] {seg.text}
                       </div>
@@ -144,7 +144,7 @@ Hello, welcome to today's lesson.`}
               )}
 
               {error && (
-                <div className="bg-[#ff2d78] bg-opacity-20 border-2 border-[#ff2d78] px-4 py-2 font-mono text-sm text-[#ff2d78]">
+                <div className="bg-[#ffe1ea] bg-opacity-20 border-2 border-[#ffadc2] px-4 py-2 font-mono text-sm text-[#b65d76]">
                   {error}
                 </div>
               )}

@@ -31,20 +31,20 @@ export default function TranscriptLine({
   return (
     <div
       className={`
-        flex gap-3 px-4 py-3 cursor-pointer
-        border-l-4 transition-all duration-150
+        flex gap-3 rounded-2xl px-4 py-3 cursor-pointer
+        border transition-all duration-200
         ${
           isActive
-            ? 'border-[#00f5d4] bg-[#0a1a1a] text-[#00f5d4] [text-shadow:0_0_10px_#00f5d4]'
-            : 'border-transparent text-[#8888aa] hover:bg-[#111118]'
+            ? 'border-[#9fb7ff]/70 bg-gradient-to-r from-[#edf2ff] via-[#f0eefb] to-[#e8fbf2] text-[#384057] shadow-[inset_4px_4px_10px_rgba(159,183,255,0.18),inset_-4px_-4px_10px_rgba(255,255,255,0.9)]'
+            : 'border-transparent text-[#7b8197] hover:bg-white/60 hover:shadow-[4px_4px_12px_rgba(167,158,143,0.12),-4px_-4px_12px_rgba(255,255,255,0.8)]'
         }
       `}
       onClick={() => onSeek(segment.start_time)}
     >
-      <span className="font-mono text-xs text-[#444466] shrink-0 mt-1">
+      <span className="font-mono text-xs font-bold text-[#aeb4c5] shrink-0 mt-1">
         [{formatTime(segment.start_time)}]
       </span>
-      <span className="font-terminal text-xl flex-1">{segment.text}</span>
+      <span className="font-terminal text-lg leading-relaxed flex-1">{segment.text}</span>
       <div className="flex gap-2 shrink-0">
         <button
           onClick={(e) => {
@@ -52,11 +52,11 @@ export default function TranscriptLine({
             onToggleLoop(segment);
           }}
           className={`
-            p-1.5 rounded transition-all
+            p-1.5 rounded-xl transition-all
             ${
               isLooping
-                ? 'text-[#ff2d78] [filter:drop-shadow(0_0_6px_#ff2d78)] animate-pulse'
-                : 'text-[#444466] hover:text-[#8888aa]'
+                ? 'bg-[#ffe1ea] text-[#b65d76] shadow-[inset_3px_3px_8px_rgba(182,93,118,0.14)] animate-pulse'
+                : 'text-[#aeb4c5] hover:bg-[#fff0cf] hover:text-[#a8752b]'
             }
           `}
         >
@@ -68,15 +68,15 @@ export default function TranscriptLine({
             onToggleSave(segment.id);
           }}
           className={`
-            p-1.5 rounded transition-all
+            p-1.5 rounded-xl transition-all
             ${
               isSaved
-                ? 'text-[#ffd60a] [filter:drop-shadow(0_0_6px_#ffd60a)]'
-                : 'text-[#444466] hover:text-[#8888aa]'
+                ? 'bg-[#fff0cf] text-[#d29431] shadow-[inset_3px_3px_8px_rgba(168,117,43,0.14)]'
+                : 'text-[#aeb4c5] hover:bg-[#fff0cf] hover:text-[#d29431]'
             }
           `}
         >
-          <Star size={16} fill={isSaved ? '#ffd60a' : 'none'} />
+          <Star size={16} fill={isSaved ? '#ffd89e' : 'none'} />
         </button>
       </div>
     </div>

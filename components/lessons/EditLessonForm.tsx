@@ -82,17 +82,17 @@ export default function EditLessonForm({ lesson, onCancel }: EditLessonFormProps
   if (loadingTranscript) {
     return (
       <div className="flex items-center justify-center p-8">
-        <p className="font-mono text-[#8888aa]">Loading...</p>
+        <p className="font-mono text-[#7b8197]">Loading...</p>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <PixelCard>
+      <PixelCard tint="lavender">
         <div className="p-6 space-y-4">
           <div>
-            <label className="font-mono text-sm text-[#8888aa] block mb-2">
+            <label className="font-mono text-sm text-[#7b8197] block mb-2">
               Lesson Title
             </label>
             <input
@@ -100,13 +100,13 @@ export default function EditLessonForm({ lesson, onCancel }: EditLessonFormProps
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+              className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
               placeholder="e.g. Daily Habits - English Lesson"
             />
           </div>
 
           <div>
-            <label className="font-mono text-sm text-[#8888aa] block mb-2">
+            <label className="font-mono text-sm text-[#7b8197] block mb-2">
               YouTube URL
             </label>
             <input
@@ -114,34 +114,34 @@ export default function EditLessonForm({ lesson, onCancel }: EditLessonFormProps
               value={youtubeUrl}
               onChange={(e) => setYoutubeUrl(e.target.value)}
               required
-              className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-mono focus:border-[#00f5d4] focus:outline-none"
+              className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-mono text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff]"
               placeholder="https://www.youtube.com/watch?v=..."
             />
           </div>
 
           <div>
-            <label className="font-mono text-sm text-[#8888aa] block mb-2">
+            <label className="font-mono text-sm text-[#7b8197] block mb-2">
               Transcript
             </label>
             <textarea
               value={transcriptText}
               onChange={(e) => setTranscriptText(e.target.value)}
               rows={12}
-              className="w-full bg-[#0a0a0f] border-2 border-[#333355] text-[#e8e8f0] px-4 py-2 font-terminal text-lg focus:border-[#00f5d4] focus:outline-none resize-y"
+              className="w-full rounded-2xl border border-white/70 bg-[#fffdf8] px-4 py-3 font-terminal text-lg text-[#384057] shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none focus:ring-4 focus:ring-[#dfe7ff] resize-y"
               placeholder="Paste your transcript here"
             />
           </div>
 
           {previewSegments.length > 0 && (
             <div>
-              <label className="font-mono text-sm text-[#8888aa] block mb-2">
+              <label className="font-mono text-sm text-[#7b8197] block mb-2">
                 Preview (first 5 segments)
               </label>
               <div className="space-y-2">
                 {previewSegments.map((seg, i) => (
                   <div
                     key={i}
-                    className="bg-[#0a0a0f] border border-[#333355] px-3 py-2 font-terminal text-sm text-[#8888aa]"
+                    className="rounded-2xl border border-white/70 bg-[#f7f4ec]/70 px-3 py-2 font-terminal text-sm text-[#7b8197] shadow-[inset_3px_3px_8px_rgba(167,158,143,0.1)]"
                   >
                     [{seg.start_time.toFixed(1)}s - {seg.end_time.toFixed(1)}s] {seg.text}
                   </div>
@@ -151,7 +151,7 @@ export default function EditLessonForm({ lesson, onCancel }: EditLessonFormProps
           )}
 
           {error && (
-            <div className="bg-[#ff2d78] bg-opacity-20 border-2 border-[#ff2d78] px-4 py-2 font-mono text-sm text-[#ff2d78]">
+            <div className="bg-[#ffe1ea] bg-opacity-20 border-2 border-[#ffadc2] px-4 py-2 font-mono text-sm text-[#b65d76]">
               {error}
             </div>
           )}

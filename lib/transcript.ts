@@ -114,18 +114,39 @@ function srtTimeToSeconds(timeStr: string): number {
 }
 
 export function youtubeUrlToId(url: string): string | null {
-  // Handle various YouTube URL formats
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\?\/]+)/,
-    /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
-  ];
+  const value = url.trim();
 
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match) {
-      return match[1];
+  if (/^[a-zA-Z0-9_-]{11}$/.test(value)) {
+    return value;
+  }
+
+  try {
+    const parsedUrl = new URL(value);
+    const hostname = parsedUrl.hostname.replace(/^www\./, '').replace(/^m\./, '');
+
+    if (hostname === 'youtu.be') {
+      const videoId = parsedUrl.pathname.split('/').filter(Boolean)[0];
+      return isYouTubeVideoId(videoId) ? videoId : null;
     }
+
+    if (hostname === 'youtube.com' || hostname === 'youtube-nocookie.com') {
+      const videoId = parsedUrl.searchParams.get('v');
+      if (isYouTubeVideoId(videoId)) {
+        return videoId;
+      }
+
+      const [, route, routeVideoId] = parsedUrl.pathname.split('/');
+      if (['embed', 'shorts', 'live'].includes(route) && isYouTubeVideoId(routeVideoId)) {
+        return routeVideoId;
+      }
+    }
+  } catch {
+    return null;
   }
 
   return null;
+}
+
+function isYouTubeVideoId(value: string | null | undefined): value is string {
+  return /^[a-zA-Z0-9_-]{11}$/.test(value ?? '');
 }

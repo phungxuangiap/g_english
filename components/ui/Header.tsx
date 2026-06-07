@@ -40,22 +40,22 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b-2 border-[#333355] bg-[#0a0a0f]">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="font-pixel text-xl text-[#00f5d4] hover:text-[#00d4b8]">
+    <header className="sticky top-0 z-40 border-b border-white/70 bg-[#fffdf8]/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(167,158,143,0.12)]">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+        <Link href="/" className="font-pixel text-xl font-extrabold text-[#5267a8] hover:text-[#7b6fc7]">
           ENGLISH APP
         </Link>
 
         <nav className="flex items-center gap-4">
           <Link
             href="/lessons"
-            className="font-mono text-sm text-[#8888aa] hover:text-[#00f5d4]"
+            className="font-mono text-sm font-semibold text-[#7b8197] hover:text-[#5267a8]"
           >
             Lessons
           </Link>
           <Link
             href="/library"
-            className="font-mono text-sm text-[#8888aa] hover:text-[#00f5d4]"
+            className="font-mono text-sm font-semibold text-[#7b8197] hover:text-[#5267a8]"
           >
             Library
           </Link>
@@ -64,7 +64,7 @@ export default function Header() {
             <>
               {user ? (
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-[#8888aa]">
+                  <span className="font-mono text-xs text-[#7b8197]">
                     {user.email}
                   </span>
                   <PixelButton variant="red" onClick={handleSignOut}>

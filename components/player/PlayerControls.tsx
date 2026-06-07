@@ -11,7 +11,7 @@ interface PlayerControlsProps {
 
 export default function PlayerControls({ isPlaying, onPlay, onPause }: PlayerControlsProps) {
   return (
-    <div className="flex items-center gap-4 p-4 bg-[#111118] border-t-2 border-[#333355]">
+    <div className="m-4 mt-0 flex items-center gap-4 rounded-[1.5rem] bg-[#fffdf8]/85 p-4 shadow-[inset_4px_4px_10px_rgba(167,158,143,0.12),inset_-4px_-4px_10px_rgba(255,255,255,0.9)]">
       <PixelButton
         onClick={isPlaying ? onPause : onPlay}
         variant="green"

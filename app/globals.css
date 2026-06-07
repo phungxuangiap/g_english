@@ -1,47 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #111118;
-  --bg-elevated: #1a1a24;
-  --accent-green: #1db954;
-  --accent-cyan: #00f5d4;
-  --accent-yellow: #ffd60a;
-  --accent-pink: #ff2d78;
-  --text-primary: #e8e8f0;
-  --text-secondary: #8888aa;
-  --text-muted: #444466;
-  --pixel-border: 2px solid #333355;
-  --pixel-border-active: 2px solid var(--accent-cyan);
+  --bg-primary: #f7f4ec;
+  --bg-secondary: #f0eefb;
+  --bg-elevated: #fffdf8;
+  --accent-green: #8dddc4;
+  --accent-cyan: #9fb7ff;
+  --accent-yellow: #ffd89e;
+  --accent-pink: #ffadc2;
+  --text-primary: #384057;
+  --text-secondary: #7b8197;
+  --text-muted: #aeb4c5;
+  --soft-border: 1px solid rgba(139, 148, 174, 0.2);
+  --soft-shadow: 10px 10px 24px rgba(167, 158, 143, 0.22), -10px -10px 24px rgba(255, 255, 255, 0.9);
+  --soft-shadow-inset: inset 4px 4px 10px rgba(167, 158, 143, 0.16), inset -4px -4px 10px rgba(255, 255, 255, 0.9);
 }
 
 body {
-  background-color: var(--bg-primary);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(221, 232, 255, 0.92), transparent 30rem),
+    radial-gradient(circle at 88% 18%, rgba(232, 251, 242, 0.72), transparent 26rem),
+    radial-gradient(circle at 18% 88%, rgba(255, 240, 207, 0.68), transparent 28rem),
+    radial-gradient(circle at 82% 82%, rgba(255, 225, 234, 0.7), transparent 30rem),
+    var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito', 'Inter', sans-serif;
 }
 
-.font-pixel {
-  font-family: 'Press Start 2P', cursive;
-}
-
-.font-terminal {
-  font-family: 'VT323', monospace;
-}
-
+.font-pixel,
+.font-terminal,
 .font-mono {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Nunito', 'Inter', sans-serif;
 }
 
 .pixel-border {
-  border: var(--pixel-border);
-  box-shadow: 4px 4px 0px #333355;
+  border: var(--soft-border);
+  border-radius: 1.5rem;
+  box-shadow: var(--soft-shadow);
 }
 
 .pixel-border-active {
-  border: var(--pixel-border-active);
-  box-shadow: 4px 4px 0px #003333;
+  border: 1px solid rgba(159, 183, 255, 0.65);
+  border-radius: 1.5rem;
+  box-shadow: var(--soft-shadow), 0 0 0 6px rgba(159, 183, 255, 0.18);
 }
 
 .scanline {
@@ -50,19 +52,5 @@ body {
 }
 
 .scanline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 10;
+  content: none;
 }

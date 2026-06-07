@@ -86,7 +86,7 @@ export default function LessonPage() {
   if (!lesson) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="font-mono text-[#8888aa]">Loading...</p>
+        <p className="font-mono text-[#7b8197]">Loading...</p>
       </div>
     );
   }
@@ -95,7 +95,7 @@ export default function LessonPage() {
     return (
       <div className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-pixel text-3xl text-[#00f5d4] mb-8">EDIT LESSON</h1>
+          <h1 className="font-pixel text-3xl font-extrabold text-[#5267a8] mb-8">EDIT LESSON</h1>
           <EditLessonForm
             lesson={lesson}
             onCancel={() => setIsEditing(false)}
@@ -107,8 +107,8 @@ export default function LessonPage() {
 
   return (
     <div className="min-h-screen lg:h-screen flex flex-col">
-      <div className="p-4 border-b-2 border-[#333355] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
-        <h1 className="font-mono text-xl text-[#e8e8f0]">{lesson.title}</h1>
+      <div className="m-4 rounded-[1.5rem] border border-white/70 bg-[#fffdf8]/75 p-4 shadow-[8px_8px_20px_rgba(167,158,143,0.14),-8px_-8px_20px_rgba(255,255,255,0.85)] flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+        <h1 className="font-mono text-xl font-extrabold text-[#384057]">{lesson.title}</h1>
         <div className="flex gap-3">
           <PixelButton variant="cyan" onClick={() => setIsEditing(true)}>
             EDIT
@@ -128,8 +128,8 @@ export default function LessonPage() {
           </div>
           <PlayerControls isPlaying={isPlaying} onPlay={play} onPause={pause} />
           {loopSegment && (
-            <div className="px-4 py-2 bg-[#ff2d78] bg-opacity-20 border-t-2 border-[#ff2d78]">
-              <p className="font-mono text-sm text-[#ff2d78] animate-pulse">
+            <div className="mx-4 mb-4 rounded-2xl border border-[#ffadc2]/50 bg-[#ffe1ea]/70 px-4 py-3 shadow-[inset_3px_3px_8px_rgba(182,93,118,0.1)]">
+              <p className="font-mono text-sm font-bold text-[#b65d76] animate-pulse">
                 🔁 LOOP ACTIVE
               </p>
             </div>
@@ -150,7 +150,7 @@ export default function LessonPage() {
             />
           ) : (
             <div className="flex items-center justify-center h-full">
-              <p className="font-mono text-[#8888aa]">Loading player...</p>
+              <p className="font-mono text-[#7b8197]">Loading player...</p>
             </div>
           )}
         </div>
